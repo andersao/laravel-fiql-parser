@@ -9,6 +9,20 @@ use Illuminate\Support\Facades\DB;
 
 class QueryBuilderTest extends TestCase
 {
+    public function testShouldBuildQueryFromString() {
+        $builder = DB::table('users');
+        $query = QueryBuilder::apply('last_name==foo', $builder);
+        $this->assertEquals('select * from `users` where `last_name` = ?', $query->toSql());
+        $this->assertEquals(['foo'], $query->getBindings());
+    }
+
+    public function testShouldBuildQueryFromExpression() {
+        $builder = DB::table('users');
+        $query = QueryBuilder::apply(Parser::fromString('last_name==foo'), $builder);
+        $this->assertEquals('select * from `users` where `last_name` = ?', $query->toSql());
+        $this->assertEquals(['foo'], $query->getBindings());
+    }
+
     /**
      * @dataProvider queriesProvider
      */

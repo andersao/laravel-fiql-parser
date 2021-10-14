@@ -4,11 +4,14 @@ namespace Prettus\Laravel\FIQL;
 
 use Illuminate\Database\Query\Builder;
 use Prettus\FIQLParser\Expression;
+use Prettus\FIQLParser\Parser;
+
 
 class QueryBuilder
 {
     public static function apply($expression, Builder $builder): Builder
     {
+        if(is_string($expression)) $expression = Parser::fromString($expression);
         return self::applyWhere($builder, $expression);
     }
 

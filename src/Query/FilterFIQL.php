@@ -29,12 +29,16 @@ class FilterFIQL
         $this->expression = $this->ensureExpression($expression);
     }
 
-    private function ensureExpression($expression): Expression {
-        if(is_string($expression)) return Parser::fromString($expression);
+    private function ensureExpression($expression): Expression
+    {
+        if (is_string($expression)) {
+            return Parser::fromString($expression);
+        }
         return $expression;
     }
 
-    public function apply(): Builder {
+    public function apply(): Builder
+    {
         return QueryBuilder::applyFilter($this->builder, $this->expression);
     }
 }

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Prettus\FIQLParser\Expression;
 use Prettus\FIQLParser\Parser;
 
-
 class QueryBuilder
 {
     /**
@@ -20,7 +19,9 @@ class QueryBuilder
     public static function applyFilter($builder, $expression): Builder
     {
         $queryBuilder = $builder instanceof EloquentBuilder ? $builder->getQuery() : $builder;
-        if(is_string($expression)) $expression = Parser::fromString($expression);
+        if (is_string($expression)) {
+            $expression = Parser::fromString($expression);
+        }
         return self::applyWhere($queryBuilder, $expression);
     }
 

@@ -13,7 +13,7 @@
     }
   },
   "scripts": {
-    "test": "pest",
+    "test": "phpunit",
     "test:unit": "@test --watch",
     "test:ci": "@test --ci",
     "test:coverage": "@test --ci --coverage --coverage-clover coverage.clover",
@@ -22,7 +22,8 @@
   "homepage": "https://github.com/andersao/laravel-fiql-parser",
   "license": "MIT",
   "require": {
-    "illuminate/support": "^8.64"
+    "illuminate/support": "^8.64",
+    "prettus/php-fiql-parser": "dev-main"
   },
   "config": {
     "sort-packages": true
@@ -36,7 +37,7 @@
   },
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^3.2",
-    "pestphp/pest": "^1.20",
-    "pestphp/pest-plugin-watch": "dev-master"
+    "orchestra/testbench": "^6.21",
+    "phpunit/phpunit": "^9.5"
   }
 }

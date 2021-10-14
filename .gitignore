@@ -1,2 +1,9 @@
+composer.phar
 /vendor/
+.DS_Store
 .idea
+.phpunit.result.cache
+.phpunit.cache
+.vscode/
+.history/
+.php-cs-fixer.cache

@@ -1,0 +1,11 @@
+{
+    "name": "prettus/laravel-fiql-parser",
+    "description": "FIQL Parser",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Prettus\\FIQL\\": "src/"
+        }
+    },
+    "require": {}
+}

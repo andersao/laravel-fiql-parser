@@ -1,11 +1,42 @@
 {
-    "name": "prettus/laravel-fiql-parser",
-    "description": "FIQL Parser",
-    "type": "library",
-    "autoload": {
-        "psr-4": {
-            "Prettus\\FIQL\\": "src/"
-        }
-    },
-    "require": {}
+  "name": "prettus/laravel-fiql-parser",
+  "description": "FIQL Parser",
+  "keywords": [
+    "fiql-parser",
+    "fiql",
+    "laravel"
+  ],
+  "type": "library",
+  "autoload": {
+    "psr-4": {
+      "Prettus\\Laravel\\FIQL\\": "src/"
+    }
+  },
+  "scripts": {
+    "test": "pest",
+    "test:unit": "@test --watch",
+    "test:ci": "@test --ci",
+    "test:coverage": "@test --ci --coverage --coverage-clover coverage.clover",
+    "format": "php-cs-fixer fix ./src"
+  },
+  "homepage": "https://github.com/andersao/laravel-fiql-parser",
+  "license": "MIT",
+  "require": {
+    "illuminate/support": "^8.64"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Prettus\\Laravel\\FIQL\\FIQLServiceProvider"
+      ]
+    }
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.2",
+    "pestphp/pest": "^1.20",
+    "pestphp/pest-plugin-watch": "dev-master"
+  }
 }

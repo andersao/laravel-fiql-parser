@@ -12,6 +12,11 @@
       "Prettus\\Laravel\\FIQL\\": "src/"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
   "scripts": {
     "test": "phpunit",
     "test:unit": "@test --watch",

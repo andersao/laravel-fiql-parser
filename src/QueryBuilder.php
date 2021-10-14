@@ -12,13 +12,30 @@ class QueryBuilder
         return self::applyWhere($builder, $expression);
     }
 
+    private static function arrayEvery(array $data, \Closure $callback): bool
+    {
+        foreach ($data as $value) {
+            if (!$callback($value)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private static function applyWhere(Builder $builder, $expression, string $operator = 'and'): Builder
     {
         $elements = $expression instanceof Expression ? $expression->toArray() : $expression;
 
-        if (is_array($elements)) {
+        if (array_key_exists('or', $elements) or array_key_exists('and', $elements)) {
+            $operators = array_keys($elements);
+            foreach ($operators as $operator) {
+                self::addCondition($builder, $operator, $elements[$operator]);
+            }
+        } elseif (is_array($elements)) {
             $elementsCount = sizeof($elements);
-            $isCondition = $elementsCount  == 3;
+            $isCondition = $elementsCount == 3 && self::arrayEvery($elements, function ($value) {
+                return is_string($value);
+            });
 
             if ($isCondition) {
                 list($selector, $comparison, $value) = $elements;
@@ -47,12 +64,14 @@ class QueryBuilder
             $builder->orWhere(function ($query) use ($selector, $value) {
                 return self::applyWhere($query, $value, $selector);
             });
+            return;
         }
 
         if ($selector == 'and') {
             $builder->where(function ($query) use ($selector, $value) {
                 return self::applyWhere($query, $value, $selector);
             });
+            return;
         }
 
         $operator = $comparison == '==' ? '=' : $comparison;

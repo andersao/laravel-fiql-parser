@@ -22,7 +22,8 @@
     "test:unit": "@test --watch",
     "test:ci": "@test --ci",
     "test:coverage": "@test --ci --coverage --coverage-clover coverage.clover",
-    "format": "php-cs-fixer fix ./src"
+    "format": "php-cs-fixer fix ./src",
+    "format:tests": "php-cs-fixer fix ./tests"
   },
   "homepage": "https://github.com/andersao/laravel-fiql-parser",
   "license": "MIT",

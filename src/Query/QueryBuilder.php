@@ -1,18 +1,27 @@
 <?php
 
-namespace Prettus\Laravel\FIQL;
+namespace Prettus\Laravel\FIQL\Query;
 
 use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Prettus\FIQLParser\Expression;
 use Prettus\FIQLParser\Parser;
 
 
 class QueryBuilder
 {
-    public static function apply($expression, Builder $builder): Builder
+    /**
+     * @param EloquentBuilder|Builder $builder
+     * @param Expression|string $expression
+     * @return Builder
+     * @throws \Prettus\FIQLParser\Exceptions\FIQLObjectException
+     * @throws \Prettus\FIQLParser\Exceptions\FiqlFormatException
+     */
+    public static function applyFilter($builder, $expression): Builder
     {
+        $queryBuilder = $builder instanceof EloquentBuilder ? $builder->getQuery() : $builder;
         if(is_string($expression)) $expression = Parser::fromString($expression);
-        return self::applyWhere($builder, $expression);
+        return self::applyWhere($queryBuilder, $expression);
     }
 
     private static function arrayEvery(array $data, \Closure $callback): bool

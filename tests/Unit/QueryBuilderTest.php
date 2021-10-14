@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use Prettus\Laravel\FIQL\QueryBuilder;
+use Prettus\Laravel\FIQL\Query\QueryBuilder;
 use Tests\TestCase;
 use Prettus\FIQLParser\Parser;
 use Illuminate\Support\Facades\DB;
@@ -11,14 +11,14 @@ class QueryBuilderTest extends TestCase
 {
     public function testShouldBuildQueryFromString() {
         $builder = DB::table('users');
-        $query = QueryBuilder::apply('last_name==foo', $builder);
+        $query = QueryBuilder::applyFilter($builder,'last_name==foo');
         $this->assertEquals('select * from `users` where `last_name` = ?', $query->toSql());
         $this->assertEquals(['foo'], $query->getBindings());
     }
 
     public function testShouldBuildQueryFromExpression() {
         $builder = DB::table('users');
-        $query = QueryBuilder::apply(Parser::fromString('last_name==foo'), $builder);
+        $query = QueryBuilder::applyFilter($builder, Parser::fromString('last_name==foo'));
         $this->assertEquals('select * from `users` where `last_name` = ?', $query->toSql());
         $this->assertEquals(['foo'], $query->getBindings());
     }
@@ -30,7 +30,7 @@ class QueryBuilderTest extends TestCase
     {
         $builder = DB::table($table);
         $expression = Parser::fromString($fiql);
-        $query = QueryBuilder::apply($expression, $builder);
+        $query = QueryBuilder::applyFilter($builder, $expression);
         $this->assertEquals($sql, $query->toSql());
         $this->assertEquals($values, $query->getBindings());
     }

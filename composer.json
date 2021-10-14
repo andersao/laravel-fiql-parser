@@ -1,6 +1,6 @@
 {
   "name": "prettus/laravel-fiql-parser",
-  "description": "FIQL Parser",
+  "description": "Laravel FIQL Parser",
   "keywords": [
     "fiql-parser",
     "fiql",
@@ -17,21 +17,37 @@
       "Tests\\": "tests/"
     }
   },
+  "authors": [
+    {
+      "name": "Anderson Andrade",
+      "homepage": "https://andersonandra.de",
+      "email": "contato@andersonandra.de",
+      "role": "Developer"
+    }
+  ],
   "scripts": {
     "test": "phpunit",
     "test:unit": "@test --watch",
     "test:ci": "@test --ci",
-    "test:coverage": "@test --ci --coverage --coverage-clover coverage.clover",
+    "test:coverage": "@test --coverage-clover coverage.clover",
     "format": "php-cs-fixer fix ./src",
     "format:tests": "php-cs-fixer fix ./tests"
   },
   "homepage": "https://github.com/andersao/laravel-fiql-parser",
+  "support": {
+    "email": "contato@andersonandra.de",
+    "issues": "https://github.com/andersao/laravel-fiql-parser/issues",
+    "wiki": "https://github.com/andersao/laravel-fiql-parser",
+    "source": "https://github.com/andersao/laravel-fiql-parser",
+    "docs": "https://github.com/andersao/laravel-fiql-parser"
+  },
   "license": "MIT",
   "require": {
     "illuminate/support": "^8.64",
     "prettus/php-fiql-parser": "dev-main"
   },
   "config": {
+    "preferred-install": "dist",
     "sort-packages": true
   },
   "extra": {
